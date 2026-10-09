@@ -1,0 +1,129 @@
+
+<header class="app-navbar">
+  <div class="container-fluid app-navbar-container">
+    <button
+      type="button"
+      class="sidebar-toggle"
+      aria-controls="dashboard-sidebar"
+      [attr.aria-expanded]="sidebarOpen()"
+      [attr.aria-label]="sidebarOpen() ? 'Hide sidebar' : 'Show sidebar'"
+      (click)="onMenuToggle()">
+      <span class="sidebar-toggle-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+    <a
+      class="app-navbar-brand"
+      routerLink="/dashboard"
+      (click)="closeMobileNav()">
+      <span class="app-navbar-brand-mark" aria-hidden="true">
+        <i class="bi bi-box-fill"></i>
+      </span>
+      <span>Codebility</span>
+    </a>
+
+    <button
+      type="button"
+      class="navbar-toggler"
+      aria-label="Toggle navigation"
+      [attr.aria-expanded]="mobileNavOpen()"
+      (click)="toggleMobileNav()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="app-navbar-collapse"
+      [class.show]="mobileNavOpen()">
+
+      <div class="app-navbar-actions">
+        <div class="app-profile-menu" (keydown.escape)="onEscape()">
+          <button
+            type="button"
+            class="app-navbar-user"
+            aria-label="Open profile menu"
+            aria-controls="app-profile-menu"
+            [attr.aria-expanded]="profileMenuOpen()"
+            [title]="user()?.name || 'My profile'"
+            (click)="toggleProfileMenu()">
+            <span class="app-navbar-avatar" aria-hidden="true">
+              {{ userInitial }}
+            </span>
+            <span class="app-navbar-name">
+              {{ user()?.name || 'My profile' }}
+            </span>
+            <i class="bi bi-chevron-down app-profile-chevron" aria-hidden="true"></i>
+          </button>
+
+          @if (profileMenuOpen()) {
+            <div
+              id="app-profile-menu"
+              class="app-profile-dropdown"
+              aria-label="Profile menu">
+              <div class="app-profile-summary">
+                <span class="app-profile-dropdown-avatar" aria-hidden="true">
+                  {{ userInitial }}
+                </span>
+                <span class="app-profile-summary-copy">
+                  <strong>{{ user()?.name || 'Your account' }}</strong>
+                  @if (user()?.email; as email) {
+                    <small>{{ email }}</small>
+                  }
+                </span>
+              </div>
+              <a
+                routerLink="/profile"
+                class="app-profile-link"
+                (click)="closeMobileNav()">
+                <i class="bi bi-person-circle" aria-hidden="true"></i>
+                <span>Profile &amp; security</span>
+                <i class="bi bi-arrow-up-right ms-auto" aria-hidden="true"></i>
+              </a>
+            </div>
+          }
+        </div>
+
+        <div class="app-theme-control">
+          <label for="app-theme-select" class="visually-hidden">
+            Choose theme
+          </label>
+
+          <select
+            id="app-theme-select"
+            class="form-select form-select-sm app-theme-select"
+            [ngModel]="currentTheme"
+            (ngModelChange)="setTheme($event)"
+            aria-label="Choose application theme">
+
+            @for (theme of themeService.themes; track theme) {
+              <option [value]="theme">
+                {{ themeLabels[theme] }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <button
+          type="button"
+          class="btn app-navbar-logout"
+          (click)="onLogout()">
+          <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  @if (logoutError()) {
+    <div class="alert alert-danger app-navbar-error mb-0" role="alert">
+      {{ logoutError() }}
+    </div>
+  }
+  @if (accountError()) {
+    <div class="alert alert-danger app-navbar-error mb-0" role="alert">
+      {{ accountError() }}
+    </div>
+  }
+</header>

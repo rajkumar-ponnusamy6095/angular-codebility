@@ -1,0 +1,114 @@
+
+.error-page__content {
+  min-height: calc(100vh - 72px);
+  padding: 40px 20px;
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgb(139 92 246 / 9%),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 85%,
+      rgb(139 92 246 / 12%),
+      transparent 35%
+    ),
+    var(--page-background);
+}
+
+.error-page__row {
+  min-height: calc(100vh - 152px);
+}
+
+.error-page__column {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.error-card {
+  width: 100%;
+  border: 1px solid rgb(226 232 240 / 90%);
+  border-radius: 7px;
+  background: #fff;
+}
+
+.error-card .card-body {
+  padding: 44px 32px !important;
+}
+
+.error-illustration {
+  margin-bottom: 12px;
+}
+
+.error-code {
+  color: var(--primary-color);
+  font-size: clamp(64px, 10vw, 100px);
+  font-weight: 800;
+  letter-spacing: -4px;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.error-title {
+  margin: 14px 0 12px;
+  color: #172b4d;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.error-message {
+  margin: 0 auto 28px;
+  max-width: 400px;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.error-actions {
+  align-items: center;
+}
+
+.error-button {
+  min-height: 42px;
+  padding: 9px 17px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.error-button:focus-visible {
+  outline: 3px solid var(--primary-soft);
+  outline-offset: 2px;
+}
+
+@media (max-width: 575.98px) {
+  .error-page__content {
+    min-height: calc(100vh - 64px);
+    padding: 24px 14px;
+  }
+
+  .error-page__row {
+    min-height: calc(100vh - 112px);
+  }
+
+  .error-card .card-body {
+    padding: 32px 20px !important;
+  }
+
+  .error-title {
+    font-size: 23px;
+  }
+
+  .error-message {
+    font-size: 14px;
+  }
+
+  .error-actions {
+    flex-direction: column;
+  }
+
+  .error-button {
+    width: 100%;
+  }
+}

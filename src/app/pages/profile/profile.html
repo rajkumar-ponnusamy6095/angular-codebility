@@ -1,0 +1,380 @@
+<section class="profile-page">
+  <header class="profile-page-heading">
+    <div>
+      <span class="profile-eyebrow">ACCOUNT CENTER</span>
+      <h1>Profile &amp; security</h1>
+      <p>Manage your personal information and keep your account secure.</p>
+    </div>
+    <span class="profile-heading-icon" aria-hidden="true">
+      <i class="bi bi-person-gear"></i>
+    </span>
+  </header>
+
+  @if (loading()) {
+    <div class="profile-loading" role="status">
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      <span>Loading your account...</span>
+    </div>
+  } @else if (loadError()) {
+    <div class="profile-load-error" role="alert">
+      <span class="profile-load-error-icon" aria-hidden="true">
+        <i class="bi bi-exclamation-circle"></i>
+      </span>
+      <div>
+        <strong>We couldn’t load your profile</strong>
+        <p>{{ loadError() }}</p>
+        <button type="button" class="btn btn-primary btn-sm" (click)="loadAccount()">
+          Try again
+        </button>
+      </div>
+    </div>
+  } @else if (account(); as currentAccount) {
+    <section class="profile-hero">
+      <div class="profile-hero-glow" aria-hidden="true"></div>
+      <div class="profile-hero-main">
+        <div class="profile-avatar" aria-hidden="true">{{ userInitials }}</div>
+        <div class="profile-hero-copy">
+          <span class="profile-hero-label">YOUR PROFILE</span>
+          <h2>{{ currentAccount.name }}</h2>
+          <p>{{ currentAccount.department || 'Department not set' }}</p>
+        </div>
+      </div>
+      <div class="profile-hero-meta">
+        <span class="profile-badge profile-role">
+          <i class="bi bi-shield-check" aria-hidden="true"></i>
+          {{ currentAccount.role === 'ADMIN' ? 'Administrator' : 'Team member' }}
+        </span>
+        <span
+          class="profile-badge"
+          [class.profile-verified]="currentAccount.isVerified"
+          [class.profile-unverified]="!currentAccount.isVerified">
+          <i
+            class="bi"
+            [class.bi-patch-check-fill]="currentAccount.isVerified"
+            [class.bi-exclamation-circle-fill]="!currentAccount.isVerified"
+            aria-hidden="true"></i>
+          {{ currentAccount.isVerified ? 'Email verified' : 'Email unverified' }}
+        </span>
+      </div>
+    </section>
+
+    @if (successMessage()) {
+      <div class="alert alert-success profile-alert" role="status">
+        <i class="bi bi-check-circle me-2" aria-hidden="true"></i>{{ successMessage() }}
+      </div>
+    }
+
+    <div class="profile-content-grid">
+      <div class="profile-primary-column">
+        <section class="profile-card">
+          <div class="profile-card-heading">
+            <div>
+              <span class="profile-section-kicker">PERSONAL DETAILS</span>
+              <h2>Profile information</h2>
+              <p>Keep your contact details current.</p>
+            </div>
+            @if (!editingProfile()) {
+              <button
+                type="button"
+                class="btn profile-edit-button"
+                (click)="startEditing()">
+                <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                <span>Edit profile</span>
+              </button>
+            }
+          </div>
+
+          @if (formError()) {
+            <div class="alert alert-danger profile-alert" role="alert">
+              {{ formError() }}
+            </div>
+          }
+
+          @if (editingProfile()) {
+            <form
+              class="profile-form"
+              [formGroup]="profileForm"
+              (ngSubmit)="saveProfile()"
+              novalidate>
+              <div class="profile-form-grid">
+                <div class="profile-field">
+                  <label for="profileFirstName">First name</label>
+                  <input
+                    id="profileFirstName"
+                    type="text"
+                    maxlength="50"
+                    autocomplete="given-name"
+                    formControlName="firstName"
+                    [class.is-invalid]="profileForm.controls.firstName.invalid && profileForm.controls.firstName.touched">
+                  @if (hasProfileError('firstName', 'required') || hasProfileError('firstName', 'pattern')) {
+                    <span class="invalid-feedback">Enter your first name.</span>
+                  } @else if (hasProfileError('firstName', 'minlength')) {
+                    <span class="invalid-feedback">Use at least 2 characters.</span>
+                  } @else if (hasProfileError('firstName', 'maxlength')) {
+                    <span class="invalid-feedback">Use no more than 50 characters.</span>
+                  }
+                </div>
+
+                <div class="profile-field">
+                  <label for="profileLastName">Last name</label>
+                  <input
+                    id="profileLastName"
+                    type="text"
+                    maxlength="50"
+                    autocomplete="family-name"
+                    formControlName="lastName"
+                    [class.is-invalid]="profileForm.controls.lastName.invalid && profileForm.controls.lastName.touched">
+                  @if (hasProfileError('lastName', 'required') || hasProfileError('lastName', 'pattern')) {
+                    <span class="invalid-feedback">Enter your last name.</span>
+                  } @else if (hasProfileError('lastName', 'minlength')) {
+                    <span class="invalid-feedback">Use at least 2 characters.</span>
+                  } @else if (hasProfileError('lastName', 'maxlength')) {
+                    <span class="invalid-feedback">Use no more than 50 characters.</span>
+                  }
+                </div>
+
+                <div class="profile-field">
+                  <label for="profileEmail">Email address</label>
+                  <input
+                    id="profileEmail"
+                    type="email"
+                    maxlength="254"
+                    autocomplete="email"
+                    formControlName="email"
+                    [class.is-invalid]="profileForm.controls.email.invalid && profileForm.controls.email.touched">
+                  @if (hasProfileError('email', 'required')) {
+                    <span class="invalid-feedback">Email address is required.</span>
+                  } @else if (hasProfileError('email', 'email')) {
+                    <span class="invalid-feedback">Enter a valid email address.</span>
+                  } @else if (hasProfileError('email', 'maxlength')) {
+                    <span class="invalid-feedback">Email address is too long.</span>
+                  }
+                </div>
+
+                <div class="profile-field">
+                  <label for="profilePhone">Phone number</label>
+                  <input
+                    id="profilePhone"
+                    type="tel"
+                    maxlength="20"
+                    autocomplete="tel"
+                    placeholder="+1 (555) 123-4567"
+                    formControlName="phone"
+                    [class.is-invalid]="profileForm.controls.phone.invalid && profileForm.controls.phone.touched">
+                  @if (hasProfileError('phone', 'required')) {
+                    <span class="invalid-feedback">Phone number is required.</span>
+                  } @else if (hasProfileError('phone', 'phoneFormat')) {
+                    <span class="invalid-feedback">Enter a valid phone number.</span>
+                  } @else if (hasProfileError('phone', 'phoneLength')) {
+                    <span class="invalid-feedback">Phone number must contain 7 to 15 digits.</span>
+                  } @else if (hasProfileError('phone', 'maxlength')) {
+                    <span class="invalid-feedback">Phone number is too long.</span>
+                  }
+                </div>
+
+                <div class="profile-field profile-field-wide">
+                  <label for="profileDepartment">Department</label>
+                  <select
+                    id="profileDepartment"
+                    class="form-select"
+                    formControlName="department"
+                    [class.is-invalid]="profileForm.controls.department.invalid && profileForm.controls.department.touched">
+                    <option value="">Select a department</option>
+                    @for (department of departments; track department) {
+                      <option [value]="department">{{ department }}</option>
+                    }
+                  </select>
+                  @if (hasProfileError('department', 'required') || hasProfileError('department', 'pattern')) {
+                    <span class="invalid-feedback">Select an approved department.</span>
+                  } @else if (hasProfileError('department', 'maxlength')) {
+                    <span class="invalid-feedback">Select an approved department.</span>
+                  }
+                </div>
+              </div>
+
+              <div class="profile-form-actions">
+                <button
+                  type="button"
+                  class="btn profile-cancel-button"
+                  [disabled]="savingProfile()"
+                  (click)="cancelEditing()">
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary profile-save-button"
+                  [disabled]="savingProfile()">
+                  @if (savingProfile()) {
+                    <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                    Saving...
+                  } @else {
+                    <i class="bi bi-check2 me-1" aria-hidden="true"></i>
+                    Save changes
+                  }
+                </button>
+              </div>
+            </form>
+          } @else {
+            <div class="profile-detail-grid">
+              <div class="profile-detail">
+                <span class="profile-detail-icon"><i class="bi bi-person" aria-hidden="true"></i></span>
+                <div><span>Full name</span><strong>{{ currentAccount.name }}</strong></div>
+              </div>
+              <div class="profile-detail">
+                <span class="profile-detail-icon"><i class="bi bi-envelope" aria-hidden="true"></i></span>
+                <div><span>Email address</span><strong>{{ currentAccount.email }}</strong></div>
+              </div>
+              <div class="profile-detail">
+                <span class="profile-detail-icon"><i class="bi bi-telephone" aria-hidden="true"></i></span>
+                <div><span>Phone number</span><strong>{{ currentAccount.phone || 'Not provided' }}</strong></div>
+              </div>
+              <div class="profile-detail">
+                <span class="profile-detail-icon"><i class="bi bi-building" aria-hidden="true"></i></span>
+                <div><span>Department</span><strong>{{ currentAccount.department || 'Not set' }}</strong></div>
+              </div>
+              <div class="profile-detail">
+                <span class="profile-detail-icon"><i class="bi bi-person-lines-fill" aria-hidden="true"></i></span>
+                <div>
+                  <span>Gender</span>
+                  <strong>{{ currentAccount.gender || 'Not specified' }}</strong>
+                </div>
+              </div>
+              <div class="profile-detail">
+                <span class="profile-detail-icon"><i class="bi bi-calendar3" aria-hidden="true"></i></span>
+                <div>
+                  <span>Member since</span>
+                  <strong>{{ currentAccount.createdAt | date: 'MMM d, y' }}</strong>
+                </div>
+              </div>
+            </div>
+          }
+        </section>
+
+        <section class="profile-card profile-security-card">
+          <div class="profile-card-heading">
+            <div>
+              <span class="profile-section-kicker">KEEP YOUR ACCOUNT SAFE</span>
+              <h2>Password &amp; security</h2>
+              <p>Choose a strong password that you don’t use elsewhere.</p>
+            </div>
+            <span class="profile-security-icon" aria-hidden="true">
+              <i class="bi bi-shield-lock"></i>
+            </span>
+          </div>
+
+          @if (passwordError()) {
+            <div class="alert alert-danger profile-alert" role="alert">{{ passwordError() }}</div>
+          }
+          @if (passwordSuccess()) {
+            <div class="alert alert-success profile-alert" role="status">{{ passwordSuccess() }}</div>
+          }
+
+          <form
+            class="password-form"
+            [formGroup]="passwordForm"
+            (ngSubmit)="changePassword()"
+            novalidate>
+            <div class="profile-form-grid">
+              <div class="profile-field profile-field-wide">
+                <label for="oldPassword">Current password</label>
+                <input
+                  id="oldPassword"
+                  type="password"
+                  autocomplete="current-password"
+                  formControlName="oldPassword"
+                  [class.is-invalid]="passwordForm.controls.oldPassword.invalid && passwordForm.controls.oldPassword.touched">
+                @if (passwordForm.controls.oldPassword.touched && passwordForm.controls.oldPassword.hasError('required')) {
+                  <span class="invalid-feedback">Enter your current password.</span>
+                }
+              </div>
+              <div class="profile-field">
+                <label for="newPassword">New password</label>
+                <input
+                  id="newPassword"
+                  type="password"
+                  autocomplete="new-password"
+                  formControlName="newPassword"
+                  [class.is-invalid]="passwordForm.controls.newPassword.invalid && passwordForm.controls.newPassword.touched">
+                @if (passwordForm.controls.newPassword.touched && passwordForm.controls.newPassword.hasError('required')) {
+                  <span class="invalid-feedback">Enter a new password.</span>
+                } @else if (passwordForm.controls.newPassword.touched && passwordForm.controls.newPassword.hasError('minlength')) {
+                  <span class="invalid-feedback">Use at least 8 characters.</span>
+                }
+                <small>At least 8 characters</small>
+              </div>
+              <div class="profile-field">
+                <label for="confirmPassword">Confirm new password</label>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  autocomplete="new-password"
+                  formControlName="confirmPassword"
+                  [class.is-invalid]="passwordForm.controls.confirmPassword.invalid && passwordForm.controls.confirmPassword.touched || passwordForm.hasError('passwordMismatch') && passwordForm.controls.confirmPassword.touched">
+                @if (passwordForm.controls.confirmPassword.touched && passwordForm.controls.confirmPassword.hasError('required')) {
+                  <span class="invalid-feedback">Confirm your new password.</span>
+                } @else if (passwordForm.controls.confirmPassword.touched && passwordForm.hasError('passwordMismatch')) {
+                  <span class="invalid-feedback">Your passwords do not match.</span>
+                }
+              </div>
+            </div>
+
+            @if (passwordForm.hasError('passwordUnchanged') && passwordForm.controls.newPassword.touched) {
+              <p class="profile-inline-error" role="alert">Your new password must be different from your current password.</p>
+            }
+
+            <div class="profile-form-actions">
+              <button
+                type="submit"
+                class="btn btn-primary profile-save-button"
+                [disabled]="savingPassword()">
+                @if (savingPassword()) {
+                  <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                  Updating...
+                } @else {
+                  <i class="bi bi-lock me-1" aria-hidden="true"></i>
+                  Update password
+                }
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <aside class="profile-aside">
+        <section class="profile-card profile-account-card">
+          <div class="profile-aside-heading">
+            <span class="profile-section-kicker">ACCOUNT OVERVIEW</span>
+            <i class="bi bi-activity" aria-hidden="true"></i>
+          </div>
+          <div class="profile-account-state">
+            <span class="profile-state-dot" [class.inactive]="currentAccount.status !== 'active'"></span>
+            <div>
+              <strong>{{ currentAccount.status === 'active' ? 'Account active' : 'Account inactive' }}</strong>
+              <span>Your account is {{ currentAccount.status }}.</span>
+            </div>
+          </div>
+          <div class="profile-aside-divider"></div>
+          <div class="profile-aside-stat">
+            <span>Access level</span>
+            <strong>{{ currentAccount.role === 'ADMIN' ? 'Administrator' : 'Standard access' }}</strong>
+          </div>
+          <div class="profile-aside-stat">
+            <span>Email status</span>
+            <strong [class.profile-status-verified]="currentAccount.isVerified">
+              {{ currentAccount.isVerified ? 'Verified' : 'Needs verification' }}
+            </strong>
+          </div>
+        </section>
+
+        <section class="profile-tip-card">
+          <span class="profile-tip-icon" aria-hidden="true">
+            <i class="bi bi-lightbulb"></i>
+          </span>
+          <h3>A little security goes a long way</h3>
+          <p>Use a unique password and update it if you think your account may be at risk.</p>
+          <span class="profile-tip-mark" aria-hidden="true">SECURITY TIP</span>
+        </section>
+      </aside>
+    </div>
+  }
+</section>

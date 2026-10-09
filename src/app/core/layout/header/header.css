@@ -1,0 +1,346 @@
+:host {
+  display: block;
+}
+
+.app-navbar {
+  position: relative;
+  height: 100%;
+  background: var(--primary-hover);
+  color: #fff;
+  box-shadow: 0 2px 10px rgb(15 23 42 / 12%);
+}
+
+.app-navbar-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+}
+
+.sidebar-toggle,
+.navbar-toggler {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 26%);
+  border-radius: 9px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sidebar-toggle:hover,
+.navbar-toggler:hover {
+  background: rgb(255 255 255 / 12%);
+}
+
+.sidebar-toggle:focus-visible,
+.navbar-toggler:focus-visible,
+.app-navbar-brand:focus-visible,
+.app-navbar-user:focus-visible,
+.app-profile-link:focus-visible,
+.app-navbar-logout:focus-visible,
+.app-theme-select:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.sidebar-toggle-icon {
+  display: flex;
+  width: 18px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-toggle-icon span {
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.app-navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.app-navbar-brand:hover {
+  color: #fff;
+}
+
+.app-navbar-brand-mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 9px;
+  background: rgb(255 255 255 / 18%);
+  font-size: 0.95rem;
+}
+
+.navbar-toggler {
+  display: none;
+  margin-left: auto;
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+.app-navbar-collapse {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.app-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-profile-menu {
+  position: relative;
+}
+
+.app-navbar-user {
+  display: inline-flex;
+  min-height: 40px;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+  padding: 3px 9px 3px 4px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.app-navbar-user:hover,
+.app-navbar-user[aria-expanded='true'] {
+  border-color: rgb(255 255 255 / 22%);
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
+}
+
+.app-navbar-avatar {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 18%);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.app-navbar-name {
+  max-width: 180px;
+  overflow: hidden;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-profile-chevron {
+  font-size: 0.65rem;
+  opacity: 0.78;
+}
+
+.app-profile-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 20;
+  width: min(290px, calc(100vw - 32px));
+  padding: 9px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--surface-color);
+  color: var(--text-color);
+  box-shadow: 0 16px 38px rgb(15 23 42 / 20%);
+}
+
+.app-profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px;
+}
+
+.app-profile-dropdown-avatar {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--primary-soft);
+  color: var(--primary-color);
+  font-weight: 750;
+}
+
+.app-profile-summary-copy {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.app-profile-summary-copy strong,
+.app-profile-summary-copy small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-profile-summary-copy strong {
+  font-size: 0.88rem;
+}
+
+.app-profile-summary-copy small {
+  color: color-mix(in srgb, var(--text-color) 65%, transparent);
+  font-size: 0.76rem;
+}
+
+.app-profile-link {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 11px;
+  border-radius: 9px;
+  color: var(--text-color);
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.app-profile-link:hover {
+  background: var(--primary-soft);
+  color: var(--primary-color);
+}
+
+.app-theme-select {
+  min-width: 112px;
+  border-color: rgb(255 255 255 / 35%);
+  background-color: rgb(255 255 255 / 12%);
+  color: #fff;
+}
+
+.app-theme-select option {
+  background: var(--surface-color);
+  color: var(--text-color);
+}
+
+.app-navbar-logout {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border: 1px solid rgb(255 255 255 / 35%);
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.app-navbar-logout:hover {
+  border-color: #fff;
+  background: rgb(255 255 255 / 14%);
+  color: #fff;
+}
+
+.app-navbar-error {
+  position: absolute;
+  top: 100%;
+  right: 16px;
+  z-index: 1;
+  max-width: min(480px, calc(100vw - 32px));
+  box-shadow: 0 8px 24px rgb(15 23 42 / 16%);
+}
+
+@media (max-width: 767.98px) {
+  .app-navbar-container {
+    gap: 10px;
+    padding: 0 16px;
+  }
+
+  .app-navbar-brand {
+    font-size: 0.98rem;
+  }
+
+  .navbar-toggler {
+    display: inline-flex;
+  }
+
+  .app-navbar-collapse {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: none;
+    padding: 12px 16px 16px;
+    border-top: 1px solid rgb(255 255 255 / 18%);
+    background: var(--primary-hover);
+    box-shadow: 0 8px 14px rgb(15 23 42 / 14%);
+  }
+
+  .app-navbar-collapse.show {
+    display: flex;
+  }
+
+  .app-navbar-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .app-navbar-user {
+    margin-right: auto;
+  }
+
+  .app-profile-dropdown {
+    right: auto;
+    left: 0;
+  }
+
+  .app-navbar-name {
+    max-width: 34vw;
+  }
+}
+
+@media (max-width: 380px) {
+  .app-navbar-container {
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .app-navbar-brand {
+    gap: 7px;
+    font-size: 0.9rem;
+  }
+
+  .sidebar-toggle,
+  .navbar-toggler {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+}

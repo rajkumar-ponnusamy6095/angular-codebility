@@ -1,0 +1,225 @@
+
+<div class="users-page user-form-page">
+  <div class="users-header">
+    <div>
+      <h1>{{ isEditing() ? 'Edit User' : 'Add User' }}</h1>
+      <p>
+        {{ isEditing() ? 'Update user details' : 'Create a new user' }}
+      </p>
+    </div>
+  </div>
+
+  @if (loadError()) {
+    <div class="alert alert-danger" role="alert">
+      {{ loadError() }}
+
+      <button
+        type="button"
+        class="btn btn-secondary ms-2"
+        (click)="cancel()">
+        Back to Users
+      </button>
+    </div>
+  } @else if (loading()) {
+    <div class="users-loading" role="status">
+      <div class="spinner-border spinner-border-sm" aria-hidden="true"></div>
+      <span>Loading user...</span>
+    </div>
+  } @else {
+    <div class="card users-card">
+      <div class="card-body">
+        @if (formError()) {
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            {{ formError() }}
+            <button
+              type="button"
+              class="btn-close"
+              aria-label="Close"
+              (click)="formError.set('')">
+            </button>
+          </div>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First name</label>
+                <input
+                  id="firstName"
+                  type="text"
+                  class="form-control"
+                  formControlName="firstName"
+                  [class.is-invalid]="form.controls.firstName.invalid && form.controls.firstName.touched">
+
+                @if (hasError('firstName', 'required')) {
+                  <div class="invalid-feedback">First name is required.</div>
+                } @else if (hasError('firstName', 'minlength')) {
+                  <div class="invalid-feedback">First name must be at least 2 characters.</div>
+                }
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last name</label>
+                <input
+                  id="lastName"
+                  type="text"
+                  class="form-control"
+                  formControlName="lastName"
+                  [class.is-invalid]="form.controls.lastName.invalid && form.controls.lastName.touched">
+
+                @if (hasError('lastName', 'required')) {
+                  <div class="invalid-feedback">Last name is required.</div>
+                } @else if (hasError('lastName', 'minlength')) {
+                  <div class="invalid-feedback">Last name must be at least 2 characters.</div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  [class.is-invalid]="form.controls.email.invalid && form.controls.email.touched">
+
+                @if (hasError('email', 'required')) {
+                  <div class="invalid-feedback">Email address is required.</div>
+                } @else if (hasError('email', 'email')) {
+                  <div class="invalid-feedback">Enter a valid email address.</div>
+                }
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select
+                  id="gender"
+                  class="form-select"
+                  formControlName="gender"
+                  [class.is-invalid]="form.controls.gender.invalid && form.controls.gender.touched">
+                  @for (gender of genders; track gender) {
+                    <option [value]="gender">
+                      {{ gender.charAt(0).toUpperCase() + gender.slice(1) }}
+                    </option>
+                  }
+                </select>
+                @if (hasError('gender', 'required')) {
+                  <div class="invalid-feedback">Select a gender.</div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input
+                  id="phone"
+                  type="tel"
+                  maxlength="20"
+                  placeholder="Enter phone number"
+                  class="form-control"
+                  formControlName="phone"
+                  [class.is-invalid]="form.controls.phone.invalid && form.controls.phone.touched">
+
+                @if (hasError('phone', 'required')) {
+                  <div class="invalid-feedback">Phone number is required.</div>
+                } @else if (hasError('phone', 'phoneFormat')) {
+                  <div class="invalid-feedback">Enter a valid phone number.</div>
+                } @else if (hasError('phone', 'phoneLength')) {
+                  <div class="invalid-feedback">Phone number must contain 7 to 15 digits.</div>
+                }
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="department" class="form-label">Department</label>
+                <select
+                  id="department"
+                  class="form-select"
+                  formControlName="department"
+                  [class.is-invalid]="form.controls.department.invalid && form.controls.department.touched">
+                  <option value="">Select a department</option>
+                  @for (department of departments; track department) {
+                    <option [value]="department">{{ department }}</option>
+                  }
+                </select>
+                @if (hasError('department', 'required') || hasError('department', 'pattern')) {
+                  <div class="invalid-feedback">Select a department.</div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label for="role" class="form-label">Role</label>
+                <select
+                  id="role"
+                  class="form-select"
+                  formControlName="role"
+                  [class.is-invalid]="form.controls.role.invalid && form.controls.role.touched">
+                  <option value="user">user</option>
+                  <option value="admin">admin</option>
+                </select>
+                @if (hasError('role', 'required')) {
+                  <div class="invalid-feedback">Select a role.</div>
+                }
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-4">
+                <label for="status" class="form-label">Status</label>
+                <select
+                  id="status"
+                  class="form-select"
+                  formControlName="status"
+                  [class.is-invalid]="form.controls.status.invalid && form.controls.status.touched">
+                  <option value="active">active</option>
+                  <option value="inactive">inactive</option>
+                </select>
+                @if (hasError('status', 'required')) {
+                  <div class="invalid-feedback">Select a status.</div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              [disabled]="saving()"
+              (click)="cancel()">
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              class="btn btn-primary app-primary user-form-submit"
+              [disabled]="saving()">
+              @if (saving()) {
+                {{ isEditing() ? 'Updating User...' : 'Creating User...' }}
+              } @else {
+                {{ isEditing() ? 'Update User' : 'Create User' }}
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+</div>

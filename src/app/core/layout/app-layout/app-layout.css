@@ -1,0 +1,77 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.app-layout {
+  --sidebar-width: 240px;
+  --header-height: 64px;
+
+  position: relative;
+  min-height: 100vh;
+  background: var(--page-background);
+  color: var(--text-color);
+}
+
+.app-layout-content {
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+  padding: calc(var(--header-height) + 24px) 24px 24px;
+  background: var(--page-background);
+
+  transition: margin-left 0.25s ease;
+}
+
+.app-layout.sidebar-closed:not(.mobile-view) .app-layout-content {
+  margin-left: 0;
+}
+
+.app-layout > app-header {
+  position: fixed;
+  inset: 0 0 auto var(--sidebar-width);
+  z-index: 1050;
+  height: var(--header-height);
+  transition: left 0.25s ease;
+}
+
+.app-layout.sidebar-closed:not(.mobile-view) > app-header,
+.app-layout.mobile-view > app-header {
+  left: 0;
+}
+
+.app-layout > app-sidebar {
+  position: relative;
+  z-index: 1040;
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1030;
+  border: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+@media (max-width: 767.98px) {
+  .app-layout > app-header {
+    left: 0;
+  }
+
+  .app-layout-content,
+  .app-layout.sidebar-closed .app-layout-content {
+    margin-left: 0;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-layout-content {
+    transition: none;
+  }
+
+  .app-layout > app-header {
+    transition: none;
+  }
+}

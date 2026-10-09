@@ -1,0 +1,267 @@
+
+<app-plain-navbar />
+
+<main class="auth-page__content register-page__content container-fluid">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-12 register-column">
+      <section class="card register-card shadow">
+        <div class="card-body">
+
+          <!-- Page heading -->
+          <div class="text-center register-heading">
+            <h1>Create Account</h1>
+            <p class="text-muted mb-0">Register to get started</p>
+          </div>
+
+          @if (errorMessage()) {
+            <div class="alert alert-danger" role="alert">{{ errorMessage() }}</div>
+          }
+
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="row g-3">
+
+              <!-- First Name -->
+              <div class="col-12 col-md-6">
+                <label for="firstName" class="form-label">
+                  First Name
+                </label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter first name"
+                  autocomplete="given-name"
+                  formControlName="firstName"
+                  [class.is-invalid]="controls.firstName.invalid && controls.firstName.touched"
+                />
+                @if (controls.firstName.touched && controls.firstName.hasError('required')) {
+                  <div class="invalid-feedback">First name is required.</div>
+                } @else if (controls.firstName.touched && controls.firstName.hasError('pattern')) {
+                  <div class="invalid-feedback">First name cannot be blank.</div>
+                }
+              </div>
+
+              <!-- Last Name -->
+              <div class="col-12 col-md-6">
+                <label for="lastName" class="form-label">
+                  Last Name
+                </label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter last name"
+                  autocomplete="family-name"
+                  formControlName="lastName"
+                  [class.is-invalid]="controls.lastName.invalid && controls.lastName.touched"
+                />
+                @if (controls.lastName.touched && controls.lastName.hasError('required')) {
+                  <div class="invalid-feedback">Last name is required.</div>
+                } @else if (controls.lastName.touched && controls.lastName.hasError('pattern')) {
+                  <div class="invalid-feedback">Last name cannot be blank.</div>
+                }
+              </div>
+
+              <!-- Email -->
+              <div class="col-12">
+                <label for="email" class="form-label">
+                  Email Address
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  class="form-control"
+                  placeholder="Enter email address"
+                  autocomplete="email"
+                  formControlName="email"
+                  [class.is-invalid]="controls.email.invalid && controls.email.touched"
+                />
+                @if (controls.email.touched && controls.email.hasError('required')) {
+                  <div class="invalid-feedback">Email is required.</div>
+                } @else if (controls.email.touched && controls.email.hasError('email')) {
+                  <div class="invalid-feedback">Enter a valid email address.</div>
+                }
+              </div>
+
+              <!-- Gender -->
+              <div class="col-12 col-md-6">
+                <label for="gender" class="form-label">
+                  Gender
+                </label>
+                <select
+                  id="gender"
+                  name="gender"
+                  class="form-select"
+                  formControlName="gender"
+                  [class.is-invalid]="controls.gender.invalid && controls.gender.touched"
+                >
+                  <option value="" selected disabled>
+                    Select a gender
+                  </option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                  <option value="Prefer not to say">
+                    Prefer not to say
+                  </option>
+                </select>
+                @if (controls.gender.touched && controls.gender.hasError('required')) {
+                  <div class="invalid-feedback">Select a gender.</div>
+                }
+              </div>
+
+              <!-- Phone -->
+              <div class="col-12 col-md-6">
+                <label for="phone" class="form-label">
+                  Phone
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  class="form-control"
+                  placeholder="Enter phone number"
+                  autocomplete="tel"
+                  formControlName="phone"
+                  [class.is-invalid]="controls.phone.invalid && controls.phone.touched"
+                />
+                @if (controls.phone.touched && controls.phone.hasError('required')) {
+                  <div class="invalid-feedback">Phone number is required.</div>
+                } @else if (controls.phone.touched && controls.phone.hasError('pattern')) {
+                  <div class="invalid-feedback">Enter a valid phone number.</div>
+                }
+              </div>
+
+              <!-- Department -->
+              <div class="col-12">
+                <label for="department" class="form-label">
+                  Department
+                </label>
+                <select
+                  id="department"
+                  name="department"
+                  class="form-select"
+                  formControlName="department"
+                  [class.is-invalid]="controls.department.invalid && controls.department.touched"
+                >
+                  <option value="" selected disabled>
+                    Select a department
+                  </option>
+                  @for (department of departments; track department) {
+                    <option [value]="department">{{ department }}</option>
+                  }
+                </select>
+                @if (controls.department.touched && (controls.department.hasError('required') || controls.department.hasError('pattern'))) {
+                  <div class="invalid-feedback">Select a department.</div>
+                }
+              </div>
+
+              <!-- Password -->
+              <div class="col-12 col-md-6">
+                <label for="password" class="form-label">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  class="form-control"
+                  autocomplete="new-password"
+                  formControlName="password"
+                  [class.is-invalid]="controls.password.invalid && controls.password.touched"
+                />
+                @if (controls.password.touched && controls.password.hasError('required')) {
+                  <div class="invalid-feedback">Password is required.</div>
+                } @else if (controls.password.touched && controls.password.hasError('minlength')) {
+                  <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                }
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="col-12 col-md-6">
+                <label for="confirmPassword" class="form-label">
+                  Confirm Password
+                </label>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  class="form-control"
+                  autocomplete="new-password"
+                  formControlName="confirmPassword"
+                  [class.is-invalid]="
+                    controls.confirmPassword.touched &&
+                    (
+                      controls.confirmPassword.invalid ||
+                      registerForm.hasError('passwordMismatch')
+                    )
+                  "
+                />
+                @if (
+                  controls.confirmPassword.touched &&
+                  controls.confirmPassword.hasError('required')
+                ) {
+                  <div class="invalid-feedback">Please confirm your password.</div>
+                } @else if (
+                  controls.confirmPassword.touched &&
+                  registerForm.hasError('passwordMismatch')
+                ) {
+                  <div class="invalid-feedback">Passwords do not match.</div>
+                }
+              </div>
+
+              <!-- Terms -->
+              <div class="col-12">
+                <div class="form-check register-terms">
+                  <input
+                    id="acceptTerms"
+                    name="acceptTerms"
+                    type="checkbox"
+                    class="form-check-input"
+                    formControlName="acceptTerms"
+                    [class.is-invalid]="controls.acceptTerms.invalid && controls.acceptTerms.touched"
+                  />
+                  <label
+                    for="acceptTerms"
+                    class="form-check-label"
+                  >
+                    I accept the terms and conditions
+                  </label>
+                  @if (controls.acceptTerms.touched && controls.acceptTerms.hasError('required')) {
+                    <div class="invalid-feedback">You must accept the terms and conditions.</div>
+                  }
+                </div>
+              </div>
+
+              <!-- Submit -->
+              <div class="col-12">
+                <button
+                  type="submit"
+                  class="btn btn-primary app-primary w-100 register-submit"
+                  [disabled]="isSubmitting()"
+                >
+                  {{ isSubmitting() ? 'Creating account...' : 'Register' }}
+                </button>
+              </div>
+
+            </div>
+          </form>
+
+          <!-- Login link -->
+          <div class="text-center register-footer">
+            <span class="text-muted">
+              Already have an account?
+            </span>
+            <a routerLink="/login" class="register-link">
+              Login
+            </a>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+</main>

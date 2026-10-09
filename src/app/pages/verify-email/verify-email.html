@@ -1,0 +1,79 @@
+
+<app-plain-navbar />
+
+<main class="auth-page__content container-fluid">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-11 col-sm-8 col-md-6 col-lg-4 col-xl-3 verify-email-column">
+      <section class="card auth-card shadow">
+        <div class="card-body p-4 text-center">
+
+          <!-- Heading -->
+          <div class="verification-icon" aria-hidden="true">
+            <span>✉</span>
+          </div>
+
+          <h1 class="verify-email-heading">Verify Email</h1>
+
+          <p class="verify-email-description">
+            Confirm your email address to complete your account setup.
+          </p>
+
+          <!-- Verifying state -->
+          @if (status() === 'verifying') {
+            <div class="verification-status" role="status">
+              <span
+                class="spinner-border spinner-border-sm verification-spinner"
+                aria-hidden="true"
+              ></span>
+
+              <p class="mb-0">
+                Verifying your email address...
+              </p>
+            </div>
+          }
+
+          <!-- Error state -->
+          @if (status() === 'error') {
+            <div class="alert alert-danger verify-email-alert" role="alert">
+              {{ message() }}
+            </div>
+
+            <p class="verify-email-help">
+              The link may be invalid or expired. Please check the link
+              or request another verification email.
+            </p>
+
+            <a
+              routerLink="/login"
+              class="btn btn-primary app-primary w-100 verify-email-button"
+            >
+              Back to login
+            </a>
+          }
+
+          <!-- Success state -->
+          @if (status() === 'success') {
+            <div class="alert alert-success verify-email-alert" role="status">
+              {{ message() }}
+            </div>
+
+            <a
+              routerLink="/login"
+              class="btn btn-primary app-primary w-100 verify-email-button"
+            >
+              Continue to login
+            </a>
+          }
+
+          <!-- Footer -->
+          <div class="verify-email-footer">
+            <a routerLink="/login" class="verify-email-link">
+              Back to login
+            </a>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+</main>

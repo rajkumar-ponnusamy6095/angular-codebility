@@ -1,0 +1,90 @@
+
+.login-column {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.auth-card {
+  width: 100%;
+  border: 1px solid rgb(226 232 240 / 90%);
+  border-radius: 7px;
+  background: #fff;
+}
+
+.auth-card .card-body {
+  padding: 28px !important;
+}
+
+.login-heading {
+  margin-bottom: 10px;
+  color: #172b4d;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.7px;
+}
+
+.auth-card .text-muted {
+  color: #64748b !important;
+}
+
+.auth-card .form-label {
+  margin-bottom: 9px;
+  color: #172b4d;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.auth-card .form-control {
+  min-height: 43px;
+  padding: 9px 13px;
+  border-color: #d9e0e8;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.auth-card .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem var(--primary-soft);
+}
+
+.login-link {
+  color: var(--primary-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.login-link:hover {
+  color: var(--primary-hover);
+}
+
+.login-submit {
+  min-height: 43px;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.login-register-link {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+@media (min-width: 1200px) {
+  .login-column {
+    width: 25%;
+    flex: 0 0 25%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .auth-card .card-body {
+    padding: 24px 20px !important;
+  }
+
+  .login-heading {
+    font-size: 30px;
+  }
+
+  .login-register-link {
+    font-size: 14px;
+  }
+}

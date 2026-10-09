@@ -1,0 +1,60 @@
+
+<aside
+  id="dashboard-sidebar"
+  class="app-sidebar"
+  [class.sidebar-open]="isOpen()"
+  [class.sidebar-closed]="!isOpen()"
+  [attr.aria-hidden]="!isOpen()"
+  [attr.inert]="!isOpen() ? '' : null"
+  aria-label="Main navigation">
+
+  <a class="sidebar-brand" routerLink="/dashboard" aria-label="Codebility home" (click)="onNavigationSelected()">
+    <span class="sidebar-brand-mark" aria-hidden="true">
+      <i class="bi bi-layers-fill"></i>
+    </span>
+    <span class="sidebar-brand-copy">
+      <strong>Codebility</strong>
+      <small>WORKSPACE</small>
+    </span>
+  </a>
+
+  <div class="sidebar-workspace" aria-label="Current workspace">
+    <span class="workspace-mark" aria-hidden="true"><i class="bi bi-building"></i></span>
+    <div class="workspace-details">
+      <span class="workspace-caption">CURRENT WORKSPACE</span>
+      <div class="workspace-name">Admin Application</div>
+    </div>
+    <span class="workspace-status" aria-label="Online">
+      <span class="workspace-status-dot"></span>
+    </span>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="Main menu">
+    <span class="sidebar-nav-heading">MENU</span>
+    @for (item of sidebarItems; track item.path) {
+      <a
+        class="sidebar-link"
+        [routerLink]="item.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: item.path === '/dashboard' }"
+        ariaCurrentWhenActive="page"
+        (click)="onNavigationSelected()">
+
+        <span class="sidebar-icon" aria-hidden="true">
+          <i class="bi" [class]=" 'bi ' + item.icon"></i>
+        </span>
+
+        <span class="sidebar-label">{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <div class="sidebar-footer">
+    <span class="sidebar-footer-icon" aria-hidden="true"><i class="bi bi-shield-check"></i></span>
+    <span class="sidebar-footer-copy">
+      <strong>Codebility Workspace</strong>
+      <small>Administration portal</small>
+    </span>
+    <span class="sidebar-footer-indicator" aria-hidden="true"></span>
+  </div>
+</aside>

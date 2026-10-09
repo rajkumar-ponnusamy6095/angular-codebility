@@ -1,0 +1,28 @@
+
+<nav class="plain-navbar navbar">
+  <div class="container-fluid px-3 px-md-4">
+    <a routerLink="/login" class="plain-navbar-brand">
+      <span class="plain-navbar-brand-mark" aria-hidden="true">
+        <span class="brand-cube">◆</span>
+      </span>
+      <span>Codebility</span>
+    </a>
+
+    <div class="ms-auto">
+      <label class="visually-hidden" for="plainThemeSelector">
+        Choose theme
+      </label>
+
+      <select
+        id="plainThemeSelector"
+        class="form-select form-select-sm plain-theme-select"
+        [ngModel]="themeService.currentTheme()"
+        (ngModelChange)="onThemeChange($event)"
+      >
+        @for (theme of themeService.themes; track theme) {
+          <option [value]="theme">{{ themeLabels[theme] }}</option>
+        }
+      </select>
+    </div>
+  </div>
+</nav>

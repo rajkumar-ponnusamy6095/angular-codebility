@@ -1,0 +1,123 @@
+<section class="dashboard-page">
+  <header class="dashboard-hero">
+    <div class="dashboard-hero__content">
+      <span class="dashboard-eyebrow">WORKSPACE OVERVIEW</span>
+      <h1>Welcome to your dashboard</h1>
+      <p>Keep your people and workspace moving in the right direction.</p>
+      <a class="btn btn-primary dashboard-hero__button" routerLink="/users">
+        <i class="bi bi-people me-2" aria-hidden="true"></i>
+        Manage users
+      </a>
+    </div>
+    <div class="dashboard-hero__art" aria-hidden="true">
+      <span class="dashboard-orbit dashboard-orbit--outer"></span>
+      <span class="dashboard-orbit dashboard-orbit--inner"></span>
+      <span class="dashboard-hero__icon"><i class="bi bi-grid-1x2-fill"></i></span>
+      <span class="dashboard-spark dashboard-spark--one"></span>
+      <span class="dashboard-spark dashboard-spark--two"></span>
+    </div>
+  </header>
+
+  @if (error()) {
+    <div class="alert alert-danger dashboard-alert" role="alert">
+      <span>{{ error() }}</span>
+      <button type="button" class="btn btn-sm btn-outline-danger" (click)="loadOverview()">
+        Try again
+      </button>
+    </div>
+  }
+
+  <div class="dashboard-section-heading">
+    <div>
+      <span class="dashboard-eyebrow">AT A GLANCE</span>
+      <h2>People overview</h2>
+    </div>
+    <span class="dashboard-updated">
+      <i class="bi bi-shield-check me-1" aria-hidden="true"></i>
+      Live account data
+    </span>
+  </div>
+
+  <div class="dashboard-stats">
+    <article class="dashboard-stat-card">
+      <div class="dashboard-stat-card__icon dashboard-stat-card__icon--primary">
+        <i class="bi bi-people-fill" aria-hidden="true"></i>
+      </div>
+      <p>Total users</p>
+      @if (loading()) {
+        <span class="dashboard-stat-card__value dashboard-skeleton" aria-label="Loading"></span>
+      } @else if (overview(); as stats) {
+        <strong class="dashboard-stat-card__value">{{ stats.total }}</strong>
+      }
+      <span class="dashboard-stat-card__detail">Accounts in your workspace</span>
+    </article>
+
+    <article class="dashboard-stat-card">
+      <div class="dashboard-stat-card__icon dashboard-stat-card__icon--success">
+        <i class="bi bi-person-check-fill" aria-hidden="true"></i>
+      </div>
+      <p>Active users</p>
+      @if (loading()) {
+        <span class="dashboard-stat-card__value dashboard-skeleton" aria-label="Loading"></span>
+      } @else if (overview(); as stats) {
+        <strong class="dashboard-stat-card__value">{{ stats.active }}</strong>
+      }
+      <span class="dashboard-stat-card__detail">Ready to access the app</span>
+    </article>
+
+    <article class="dashboard-stat-card">
+      <div class="dashboard-stat-card__icon dashboard-stat-card__icon--accent">
+        <i class="bi bi-person-gear" aria-hidden="true"></i>
+      </div>
+      <p>Administrators</p>
+      @if (loading()) {
+        <span class="dashboard-stat-card__value dashboard-skeleton" aria-label="Loading"></span>
+      } @else if (overview(); as stats) {
+        <strong class="dashboard-stat-card__value">{{ stats.admins }}</strong>
+      }
+      <span class="dashboard-stat-card__detail">Users with admin access</span>
+    </article>
+  </div>
+
+  <div class="dashboard-lower-grid">
+    <section class="dashboard-panel dashboard-quick-actions">
+      <div class="dashboard-panel__heading">
+        <div>
+          <span class="dashboard-eyebrow">GET STARTED</span>
+          <h2>Quick actions</h2>
+        </div>
+        <span class="dashboard-panel__heading-icon">
+          <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
+        </span>
+      </div>
+
+      <a class="dashboard-action" routerLink="/users/create">
+        <span class="dashboard-action__icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
+        <span class="dashboard-action__copy">
+          <strong>Add a user</strong>
+          <small>Invite someone to your workspace</small>
+        </span>
+        <i class="bi bi-arrow-up-right dashboard-action__arrow" aria-hidden="true"></i>
+      </a>
+
+      <a class="dashboard-action" routerLink="/users">
+        <span class="dashboard-action__icon"><i class="bi bi-person-lines-fill" aria-hidden="true"></i></span>
+        <span class="dashboard-action__copy">
+          <strong>Browse users</strong>
+          <small>Search and manage user accounts</small>
+        </span>
+        <i class="bi bi-arrow-up-right dashboard-action__arrow" aria-hidden="true"></i>
+      </a>
+    </section>
+
+    <section class="dashboard-panel dashboard-tip">
+      <div class="dashboard-tip__icon"><i class="bi bi-stars" aria-hidden="true"></i></div>
+      <span class="dashboard-eyebrow">A TIP FOR ADMINS</span>
+      <h2>A well-organized team starts here.</h2>
+      <p>Keep user details, roles, and account status up to date from one place.</p>
+      <a routerLink="/users" class="dashboard-tip__link">
+        Go to user management <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+      </a>
+    </section>
+  </div>
+</section>

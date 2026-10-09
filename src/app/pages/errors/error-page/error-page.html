@@ -1,0 +1,47 @@
+
+<app-plain-navbar />
+
+<main class="error-page__content container-fluid">
+  <div class="row error-page__row justify-content-center align-items-center">
+    <div class="col-11 col-sm-8 col-md-6 col-lg-4 error-page__column">
+      <section class="card error-card auth-card text-center shadow">
+        <div class="card-body">
+
+          <div class="error-illustration" aria-hidden="true">
+            <span class="error-code">{{ code() }}</span>
+          </div>
+
+          <h1 class="error-title">{{ title() }}</h1>
+
+          <p class="error-message">{{ message() }}</p>
+
+          <div class="d-flex flex-wrap justify-content-center gap-2 error-actions">
+
+            @if (retryButtonText()) {
+              <button
+                type="button"
+                class="btn btn-primary app-primary error-button"
+                (click)="retry()"
+              >
+                {{ retryButtonText() }}
+              </button>
+            }
+
+            <button
+              type="button"
+              class="btn error-button"
+              [class.btn-primary]="!retryButtonText()"
+              [class.app-primary]="!retryButtonText()"
+              [class.btn-outline-primary]="!!retryButtonText()"
+              [class.app-primary-outline]="!!retryButtonText()"
+              (click)="navigateToButtonPath()"
+            >
+              {{ buttonText() }}
+            </button>
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>

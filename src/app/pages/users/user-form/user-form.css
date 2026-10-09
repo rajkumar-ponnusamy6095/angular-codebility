@@ -1,0 +1,59 @@
+.user-form-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.user-form-page .users-card {
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+}
+
+.user-form-page .users-card .card-body {
+  padding: 24px;
+}
+
+.user-form-page .form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.user-form-page .form-control,
+.user-form-page .form-select {
+  min-height: 42px;
+  border-color: var(--border-color);
+  background-color: var(--surface-color);
+  color: var(--text-color);
+}
+
+.user-form-page .form-control:focus,
+.user-form-page .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem var(--primary-soft);
+}
+
+.user-form-page .invalid-feedback {
+  font-size: 0.78rem;
+}
+
+.user-form-page .btn {
+  min-width: 100px;
+}
+
+.user-form-page .user-form-submit {
+  min-height: 42px;
+  padding: 9px 17px;
+  border-radius: 9px;
+  font-weight: 650;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary-color) 20%, transparent);
+}
+
+@media (max-width: 767px) {
+  .user-form-page .users-card .card-body {
+    padding: 18px 15px;
+  }
+
+  .user-form-page .users-header {
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,149 @@
+
+.register-page__content {
+  padding-block: 2rem;
+}
+
+.register-page__content > .row {
+  width: calc(100% + var(--bs-gutter-x));
+}
+
+.register-column {
+  display: flex;
+  justify-content: center;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 710px;
+  border: 1px solid rgb(226 232 240 / 90%);
+  border-radius: 5px;
+  background: #fff;
+}
+
+.register-card .card-body {
+  padding: 22px;
+}
+
+.register-heading {
+  margin-bottom: 24px;
+}
+
+.register-heading h1 {
+  margin-bottom: 7px;
+  color: #172b4d;
+  font-size: 29px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+
+.register-heading p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.register-card .form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--bs-card-color);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.register-card .form-control,
+.register-card .form-select {
+  min-height: 36px;
+  padding: 6px 11px;
+  border-color: #d9e0e8;
+  border-radius: 5px;
+  color: #172b4d;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.register-card .form-control:focus,
+.register-card .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem var(--primary-soft);
+}
+
+.register-card .form-control::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+
+.register-terms {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 20px;
+}
+
+.register-terms .form-check-input {
+  float: none;
+  margin: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.register-terms .form-check-input:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.register-terms .form-check-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 25%, transparent);
+}
+
+.register-terms .form-check-input.is-invalid,
+.register-terms .form-check-input.is-invalid:focus {
+  border-color: var(--bs-form-invalid-border-color) !important;
+}
+
+.register-terms .form-check-input.is-invalid:focus {
+  box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 15%) !important;
+}
+
+.register-terms .form-check-label {
+  margin: 0;
+  color: #172b4d;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.register-submit {
+  min-height: 36px;
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.register-footer {
+  margin-top: 22px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.register-link {
+  color: var(--primary-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.register-link:hover {
+  color: var(--primary-hover);
+}
+
+@media (max-width: 575.98px) {
+  .register-card .card-body {
+    padding: 20px 16px;
+  }
+
+  .register-heading h1 {
+    font-size: 25px;
+  }
+
+  .register-footer {
+    font-size: 13px;
+  }
+}
