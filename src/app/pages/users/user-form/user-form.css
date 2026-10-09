@@ -3,6 +3,19 @@
   margin: 0 auto;
 }
 
+/* Keep the action icon beside the heading; the header's pseudo-element is decorative. */
+.user-form-page .users-header {
+  justify-content: flex-start;
+}
+
+.user-form-header-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
 .user-form-page .users-card {
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
@@ -56,4 +69,69 @@
   .user-form-page .users-header {
     align-items: flex-start;
   }
+}
+
+.user-form-header-icon {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  flex: 0 0 62px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--app-primary) 22%, var(--app-border));
+  border-radius: 20px;
+  background: var(--app-primary-light);
+  color: var(--app-primary);
+  font-size: 1.55rem;
+  line-height: 1;
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--app-primary-dark) 22%, transparent);
+}
+
+.user-form-page .user-form-header-icon {
+  position: absolute;
+  top: 50%;
+  right: 62px;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.user-form-page .users-header > .user-form-header-content {
+  position: static;
+}
+
+.user-form-header-icon i,
+.user-form-card-heading-icon i {
+  display: block;
+  line-height: 1;
+}
+
+.user-form-card-heading {
+  align-items: center;
+}
+
+.user-form-card-heading-icon {
+  line-height: 1;
+}
+
+.user-form-page .user-form-card-heading-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--app-primary) 20%, var(--app-border));
+  border-radius: 13px;
+  background: linear-gradient(
+    145deg,
+    var(--app-primary-light),
+    color-mix(in srgb, var(--app-primary) 12%, var(--app-surface))
+  );
+  color: var(--app-primary);
+  font-size: 1rem;
+  line-height: 1;
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--app-primary-dark) 14%, transparent);
+}
+
+.user-form-page .user-form-card-heading-icon i {
+  display: block;
+  line-height: 1;
 }

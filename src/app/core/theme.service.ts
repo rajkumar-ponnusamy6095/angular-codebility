@@ -6,7 +6,8 @@ export type AppTheme =
   | 'orange'
   | 'pink'
   | 'green'
-  | 'yellow';
+  | 'yellow'
+  | 'violet';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class ThemeService {
     'pink',
     'green',
     'yellow',
+    'violet',
   ];
 
   readonly currentTheme = signal<AppTheme>(

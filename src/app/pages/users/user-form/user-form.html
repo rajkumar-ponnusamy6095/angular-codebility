@@ -1,11 +1,17 @@
 
 <div class="users-page user-form-page">
   <div class="users-header">
-    <div>
-      <h1>{{ isEditing() ? 'Edit User' : 'Add User' }}</h1>
-      <p>
-        {{ isEditing() ? 'Update user details' : 'Create a new user' }}
-      </p>
+    <div class="user-form-header-content">
+      <div>
+        <span class="user-form-eyebrow">WORKSPACE DIRECTORY</span>
+        <h1>{{ isEditing() ? 'Edit User' : 'Add User' }}</h1>
+        <p>
+          {{ isEditing() ? 'Review roles, contact details, and account access.' : 'Add a trusted teammate with the right access from day one.' }}
+        </p>
+      </div>
+      <span class="user-form-header-icon" aria-hidden="true">
+        <i class="bi" [class.bi-person-gear]="isEditing()" [class.bi-person-plus-fill]="!isEditing()"></i>
+      </span>
     </div>
   </div>
 
@@ -28,6 +34,13 @@
   } @else {
     <div class="card users-card">
       <div class="card-body">
+        <div class="user-form-card-heading">
+          <span class="user-form-card-heading-icon" aria-hidden="true"><i class="bi bi-card-checklist"></i></span>
+          <div>
+            <strong>{{ isEditing() ? 'Keep this account accurate' : 'Start with the essentials' }}</strong>
+            <span>{{ isEditing() ? 'These details control how this user appears and what they can access.' : 'Add contact details first, then choose the role and status that fit this account.' }}</span>
+          </div>
+        </div>
         @if (formError()) {
           <div class="alert alert-danger alert-dismissible" role="alert">
             {{ formError() }}

@@ -1,47 +1,30 @@
 
 <app-plain-navbar />
 
-<main class="error-page__content container-fluid">
-  <div class="row error-page__row justify-content-center align-items-center">
-    <div class="col-11 col-sm-8 col-md-6 col-lg-4 error-page__column">
-      <section class="card error-card auth-card text-center shadow">
-        <div class="card-body">
-
-          <div class="error-illustration" aria-hidden="true">
-            <span class="error-code">{{ code() }}</span>
-          </div>
-
-          <h1 class="error-title">{{ title() }}</h1>
-
-          <p class="error-message">{{ message() }}</p>
-
-          <div class="d-flex flex-wrap justify-content-center gap-2 error-actions">
-
-            @if (retryButtonText()) {
-              <button
-                type="button"
-                class="btn btn-primary app-primary error-button"
-                (click)="retry()"
-              >
-                {{ retryButtonText() }}
-              </button>
-            }
-
-            <button
-              type="button"
-              class="btn error-button"
-              [class.btn-primary]="!retryButtonText()"
-              [class.app-primary]="!retryButtonText()"
-              [class.btn-outline-primary]="!!retryButtonText()"
-              [class.app-primary-outline]="!!retryButtonText()"
-              (click)="navigateToButtonPath()"
-            >
-              {{ buttonText() }}
-            </button>
-
-          </div>
-        </div>
-      </section>
+<main class="error-page">
+  <div class="error-page__orb error-page__orb--one"></div>
+  <div class="error-page__orb error-page__orb--two"></div>
+  <section class="error-card" aria-labelledby="error-title">
+    <div class="error-card__art" aria-hidden="true">
+      <span class="error-card__grid"></span>
+      <span class="error-card__code">{{ code() }}</span>
+      <span class="error-card__badge"><i class="bi bi-stars"></i></span>
     </div>
-  </div>
+    <div class="error-card__copy">
+      <span class="error-eyebrow">CODEBILITY / SYSTEM MESSAGE</span>
+      <h1 id="error-title">{{ title() }}</h1>
+      <p>{{ message() }}</p>
+      <div class="error-card__actions">
+        @if (retryButtonText()) {
+          <button type="button" class="btn app-primary" (click)="retry()">
+            <i class="bi bi-arrow-clockwise me-2"></i>{{ retryButtonText() }}
+          </button>
+        }
+        <button type="button" class="btn" [class.app-primary]="!retryButtonText()" [class.app-primary-outline]="!!retryButtonText()" (click)="navigateToButtonPath()">
+          {{ buttonText() }}<i class="bi bi-arrow-up-right ms-2"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+  <p class="error-page__footer"><i class="bi bi-shield-check me-1"></i>Your workspace is safe. Let’s get you back on track.</p>
 </main>

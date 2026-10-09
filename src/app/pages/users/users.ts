@@ -252,6 +252,15 @@ export class Users implements OnInit {
     return user.id;
   }
 
+  initialsFor(name: string): string {
+    return name
+      .split(' ')
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part.charAt(0).toUpperCase())
+      .join('');
+  }
+
   showEllipsisBefore(page: number): boolean {
     const pages = this.visiblePages;
     const index = pages.indexOf(page);

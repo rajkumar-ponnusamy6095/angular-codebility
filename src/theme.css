@@ -1,61 +1,33 @@
-/* Default theme: Blue */
 :root,
 [data-theme="blue"] {
   --app-font-family: "DM Sans", "Segoe UI", sans-serif;
-  --primary-color: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-soft: rgba(37, 99, 235, 0.12);
-  --page-background: #f5f7fb;
-  --surface-color: #ffffff;
-  --text-color: #1f2937;
-  --muted-color: #6b7280;
-  --border-color: #e5e7eb;
+  --app-primary: #2563eb;
+  --app-primary-dark: #1d4ed8;
+  --app-primary-light: #dbeafe;
+  --app-gradient-start: #2563eb;
+  --app-gradient-end: #06b6d4;
+  --app-bg: #f8fafc;
+  --app-text: #1e293b;
+  --app-surface: #ffffff;
+  --app-border: #e2e8f0;
+  --app-muted: #64748b;
 }
 
-/* Orange */
-[data-theme="orange"] {
-  --primary-color: #ea580c;
-  --primary-hover: #c2410c;
-  --primary-soft: rgba(234, 88, 12, 0.12);
-  --page-background: #fff7ed;
-  --surface-color: #ffffff;
-  --text-color: #292524;
-  --muted-color: #78716c;
-  --border-color: #fed7aa;
-}
+[data-theme="orange"] { --app-primary:#f97316; --app-primary-dark:#ea580c; --app-primary-light:#ffedd5; --app-gradient-start:#f97316; --app-gradient-end:#f59e0b; }
+[data-theme="pink"] { --app-primary:#ec4899; --app-primary-dark:#db2777; --app-primary-light:#fce7f3; --app-gradient-start:#ec4899; --app-gradient-end:#f43f5e; }
+[data-theme="green"] { --app-primary:#10b981; --app-primary-dark:#059669; --app-primary-light:#d1fae5; --app-gradient-start:#10b981; --app-gradient-end:#14b8a6; }
+[data-theme="yellow"] { --app-primary:#eab308; --app-primary-dark:#ca8a04; --app-primary-light:#fef9c3; --app-gradient-start:#eab308; --app-gradient-end:#f59e0b; }
+[data-theme="violet"] { --app-primary:#8b5cf6; --app-primary-dark:#7c3aed; --app-primary-light:#ede9fe; --app-gradient-start:#8b5cf6; --app-gradient-end:#6366f1; }
 
-/* Pink */
-[data-theme="pink"] {
-  --primary-color: #db2777;
-  --primary-hover: #be185d;
-  --primary-soft: rgba(219, 39, 119, 0.12);
-  --page-background: #fdf2f8;
-  --surface-color: #ffffff;
-  --text-color: #27272a;
-  --muted-color: #71717a;
-  --border-color: #fbcfe8;
-}
-
-/* Green */
-[data-theme="green"] {
-  --primary-color: #16a34a;
-  --primary-hover: #15803d;
-  --primary-soft: rgba(22, 163, 74, 0.12);
-  --page-background: #f0fdf4;
-  --surface-color: #ffffff;
-  --text-color: #1f2937;
-  --muted-color: #6b7280;
-  --border-color: #bbf7d0;
-}
-
-/* Yellow */
-[data-theme="yellow"] {
-  --primary-color: #ca8a04;
-  --primary-hover: #a16207;
-  --primary-soft: rgba(202, 138, 4, 0.12);
-  --page-background: #fefce8;
-  --surface-color: #ffffff;
-  --text-color: #292524;
-  --muted-color: #78716c;
-  --border-color: #fde68a;
+/* Compatibility aliases for the existing Angular component styles. */
+:root,
+[data-theme] {
+  --primary-color: var(--app-primary);
+  --primary-hover: var(--app-primary-dark);
+  --primary-soft: color-mix(in srgb, var(--app-primary) 12%, transparent);
+  --page-background: var(--app-bg);
+  --surface-color: var(--app-surface);
+  --text-color: var(--app-text);
+  --muted-color: var(--app-muted);
+  --border-color: var(--app-border);
 }

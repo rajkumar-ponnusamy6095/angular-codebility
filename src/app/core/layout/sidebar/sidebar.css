@@ -172,6 +172,14 @@
   transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
+/* Match the React sidebar label metrics exactly. */
+.sidebar-link .sidebar-label {
+  font-family: var(--app-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
 .sidebar-link:hover {
   transform: translateX(2px);
   border-color: color-mix(in srgb, var(--primary-color) 12%, transparent);

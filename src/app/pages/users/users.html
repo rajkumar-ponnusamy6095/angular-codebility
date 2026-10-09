@@ -107,7 +107,12 @@
                     <tbody>
                         @for (user of users(); track trackByUserId($index, user)) {
                         <tr>
-                            <td>{{ user.name }}</td>
+                            <td>
+                                <div class="user-name">
+                                    <span class="user-avatar" aria-hidden="true">{{ initialsFor(user.name) }}</span>
+                                    {{ user.name }}
+                                </div>
+                            </td>
                             <td>{{ user.email }}</td>
                             <td>{{ user.gender }}</td>
                             <td>{{ user.phone }}</td>

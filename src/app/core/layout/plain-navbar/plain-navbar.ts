@@ -21,6 +21,7 @@ export class PlainNavbar {
     pink: 'Pink',
     green: 'Green',
     yellow: 'Yellow',
+    violet: 'Violet',
   };
 
   onThemeChange(theme: AppTheme): void {

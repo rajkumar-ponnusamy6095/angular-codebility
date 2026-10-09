@@ -141,14 +141,10 @@
                     maxlength="254"
                     autocomplete="email"
                     formControlName="email"
+                    readonly
+                    class="disabled"
                     [class.is-invalid]="profileForm.controls.email.invalid && profileForm.controls.email.touched">
-                  @if (hasProfileError('email', 'required')) {
-                    <span class="invalid-feedback">Email address is required.</span>
-                  } @else if (hasProfileError('email', 'email')) {
-                    <span class="invalid-feedback">Enter a valid email address.</span>
-                  } @else if (hasProfileError('email', 'maxlength')) {
-                    <span class="invalid-feedback">Email address is too long.</span>
-                  }
+                  <small>Email addresses cannot be changed here.</small>
                 </div>
 
                 <div class="profile-field">

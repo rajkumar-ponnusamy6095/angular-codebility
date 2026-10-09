@@ -420,3 +420,61 @@
     justify-content: center;
   }
 }
+
+/* Match the React table rhythm and typography exactly. */
+.users-page {
+  padding: 24px;
+}
+
+.users-header h1 {
+  font-size: clamp(1.6rem, 3vw, 2.15rem);
+  font-weight: 800;
+}
+
+.users-header p {
+  font-size: 0.9rem;
+}
+
+.users-card {
+  border-radius: 20px;
+}
+
+.users-card > .card-body {
+  padding: 24px;
+}
+
+.users-table {
+  min-width: 900px;
+  font-size: 0.79rem;
+}
+
+.users-table thead th {
+  padding: 14px 12px;
+  background: color-mix(in srgb, var(--app-primary) 6%, var(--app-surface));
+  color: var(--app-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.users-table tbody td {
+  padding: 15px 12px;
+}
+
+.user-status-badge.is-active {
+  padding: 6px 10px;
+  background: var(--app-primary) !important;
+  color: #fff !important;
+  font-size: 0.68rem;
+  font-weight: 750;
+}
+
+@media (max-width: 767px) {
+  .users-page {
+    padding: 16px;
+  }
+
+  .users-card > .card-body {
+    padding: 16px;
+  }
+}

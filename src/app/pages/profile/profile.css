@@ -373,6 +373,14 @@
   box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
+.profile-field input:disabled,
+.profile-field input.disabled {
+  background: var(--page-background);
+  color: var(--text-color);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
 .profile-field .invalid-feedback {
   font-size: 0.74rem;
 }

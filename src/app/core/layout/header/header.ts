@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 
 import { ThemeService } from '../../theme.service';
 
-type AppTheme = 'blue' | 'orange' | 'pink' | 'green' | 'yellow';
+type AppTheme = 'blue' | 'orange' | 'pink' | 'green' | 'yellow' | 'violet';
 
 export interface HeaderUser {
   name: string;
@@ -49,7 +49,8 @@ export class Header {
     orange: 'Orange',
     pink: 'Pink',
     green: 'Green',
-    yellow: 'Yellow'
+    yellow: 'Yellow',
+    violet: 'Violet'
   };
 
   get currentTheme(): AppTheme {
@@ -63,6 +64,7 @@ export class Header {
       value === 'pink' ||
       value === 'green' ||
       value === 'yellow'
+      || value === 'violet'
     ) {
       this.themeService.setTheme(value);
     }
